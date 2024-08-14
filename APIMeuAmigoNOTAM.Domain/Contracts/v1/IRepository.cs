@@ -10,9 +10,10 @@ namespace APIMeuAmigoNOTAM.Domain.Contracts.v1
         Task AddAsync(TEntity entity);
         Task UpdateAsync(TEntity entity);
         Task DeleteAsync(TId id);
-        Task DeleteAsync(Expression<Func<TEntity, bool>> predicate);
-        Task<TEntity?> GetSingleOrDefaultAsync(Expression<Func<TEntity, bool>> predicate);
+        Task<TEntity?> GetById(TId id);
         Task<bool> AnyAsync(Expression<Func<TEntity, bool>> predicate);
         Task<List<TEntity>> GetAllAsync();
+
+
     }
 }

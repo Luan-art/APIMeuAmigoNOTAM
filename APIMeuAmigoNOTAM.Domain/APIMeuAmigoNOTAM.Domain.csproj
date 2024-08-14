@@ -11,8 +11,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\v1\CreateNoman\" />
-    <Folder Include="Queries\" />
+    <Folder Include="Commands\v1\CreateNotam\" />
+    <Folder Include="Commands\v1\DeleteNotamByID\" />
+    <Folder Include="Commands\v1\UpdateNotam\" />
+    <Folder Include="Queries\v1\GetAllNotam\" />
+    <Folder Include="Queries\v1\GetNotamById\" />
   </ItemGroup>
 
 </Project>
