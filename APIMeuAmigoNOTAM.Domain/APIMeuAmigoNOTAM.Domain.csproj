@@ -7,15 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.4.0" />
     <PackageReference Include="MongoDB.Bson" Version="2.28.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Commands\v1\CreateNotam\" />
-    <Folder Include="Commands\v1\DeleteNotamByID\" />
-    <Folder Include="Commands\v1\UpdateNotam\" />
-    <Folder Include="Queries\v1\GetAllNotam\" />
-    <Folder Include="Queries\v1\GetNotamById\" />
   </ItemGroup>
 
 </Project>
