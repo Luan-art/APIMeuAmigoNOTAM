@@ -18,7 +18,7 @@ namespace APIMeuAmigoNOTAM.Domain.Entities.v1
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public string Comments { get; set; }
-        public bool IsExpired { get; set; } 
+        public bool? IsExpired { get; set; } 
 
         public Notam()
         {

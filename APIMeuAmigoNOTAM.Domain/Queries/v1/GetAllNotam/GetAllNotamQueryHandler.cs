@@ -1,4 +1,8 @@
-﻿using System;
+﻿using APIMeuAmigoNOTAM.Domain.Contracts.v1;
+using APIMeuAmigoNOTAM.Domain.Queries.v1.GetNotamById;
+using AutoMapper;
+using MediatR;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +10,20 @@ using System.Threading.Tasks;
 
 namespace APIMeuAmigoNOTAM.Domain.Queries.v1.GetAllNotam
 {
-    internal class GetAllNotamQueryHandler
+    public class GetAllNotamQueryHandler : IRequestHandler<GetAllNotamQuery, GetAllNotamQueryResponse>
     {
+        private readonly INotamRepository _repository;
+        private readonly IMapper _mapper;
+
+        public GetAllNotamQueryHandler(INotamRepository repository, IMapper mapper)
+        {
+            _repository = repository;
+            _mapper = mapper;
+        }
+
+        public Task<GetAllNotamQueryResponse> Handle(GetAllNotamQuery request, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

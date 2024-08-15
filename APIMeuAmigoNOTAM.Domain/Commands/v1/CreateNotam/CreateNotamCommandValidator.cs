@@ -1,16 +1,12 @@
-﻿using APIMeuAmigoNOTAM.Domain.Commands.v1.CreateNotam;
-using FluentValidation;
+﻿using FluentValidation;
+using APIMeuAmigoNOTAM.Domain.Commands.v1;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace APIMeuAmigoNOTAM.Domain.Commands.v1.UpdateNotam
+namespace APIMeuAmigoNOTAM.Domain.Commands.v1.CreateNotam
 {
-    public class UpdateNotamCommandValidator : AbstractValidator<UpdateNotamCommand>
+    public class CreateNotamCommandValidator : AbstractValidator<CreateNotamCommand>
     {
-        public UpdateNotamCommandValidator()
+        public CreateNotamCommandValidator()
         {
             RuleFor(command => command.Type)
                 .NotEmpty().WithMessage("O campo 'Type' é obrigatório.")
@@ -37,6 +33,5 @@ namespace APIMeuAmigoNOTAM.Domain.Commands.v1.UpdateNotam
             RuleFor(command => command.Comments)
                 .NotEmpty().WithMessage("O campo 'Comments' é obrigatório.");
         }
-
     }
 }

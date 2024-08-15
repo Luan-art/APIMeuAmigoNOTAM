@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace APIMeuAmigoNOTAM.Domain.Commands.v1.UpdateNotam
 {
-    internal class UpdateNotamCommandResponse
+    public class UpdateNotamCommandResponse
     {
+        public string Id { get; set; }
+
     }
 }

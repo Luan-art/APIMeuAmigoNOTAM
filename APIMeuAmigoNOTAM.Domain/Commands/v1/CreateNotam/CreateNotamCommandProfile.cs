@@ -1,16 +1,15 @@
-﻿using APIMeuAmigoNOTAM.Domain.Commands.v1.CreateNotam;
-using APIMeuAmigoNOTAM.Domain.Entities.v1;
+﻿using APIMeuAmigoNOTAM.Domain.Entities.v1;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace APIMeuAmigoNOTAM.Domain.Commands.v1.UpdateNotam
+namespace APIMeuAmigoNOTAM.Domain.Commands.v1.CreateNotam
 {
-    public class UpdateNotamCommandProfile : AutoMapper.Profile
+    public class CreateNotamCommandProfile : AutoMapper.Profile
     {
-        public UpdateNotamCommandProfile()
+        public CreateNotamCommandProfile()
         {
             CreateMap<CreateNotamCommand, Notam>()
                 .ForMember(fieldOutput => fieldOutput.Id, option => option

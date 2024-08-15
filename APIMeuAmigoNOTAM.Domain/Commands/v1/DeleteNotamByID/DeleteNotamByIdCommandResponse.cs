@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace APIMeuAmigoNOTAM.Domain.Commands.v1.DeleteNotamByID
 {
-    internal class DeleteNotamByIdCommandResponse
+    public class DeleteNotamByIdCommandResponse
     {
+        public string Id { get; set; }
+
     }
 }
