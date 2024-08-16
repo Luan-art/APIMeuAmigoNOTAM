@@ -1,11 +1,7 @@
-﻿using APIMeuAmigoNOTAM.Domain.Entities.v1;
-using APIMeuAmigoNOTAM.Domain.Queries.v1.GetNotamById;
-using AutoMapper;
-using System;
+﻿using AutoMapper;
+using APIMeuAmigoNOTAM.Domain.Entities.v1;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using APIMeuAmigoNOTAM.Domain.Dtos.v1;
 
 namespace APIMeuAmigoNOTAM.Domain.Queries.v1.GetAllNotam
 {
@@ -13,8 +9,10 @@ namespace APIMeuAmigoNOTAM.Domain.Queries.v1.GetAllNotam
     {
         public GetAllNotamQueryProfile()
         {
-            CreateMap<Notam, GetAllNotamQueryResponse>();
+            CreateMap<Notam, NotamDTO>();
 
+            CreateMap<List<Notam>, GetAllNotamQueryResponse>()
+                .ForMember(dest => dest.Notams, opt => opt.MapFrom(src => src));
         }
     }
 }

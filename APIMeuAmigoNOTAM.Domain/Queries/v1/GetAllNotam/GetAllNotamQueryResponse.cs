@@ -1,4 +1,5 @@
-﻿using System;
+﻿using APIMeuAmigoNOTAM.Domain.Dtos.v1;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,13 +9,7 @@ namespace APIMeuAmigoNOTAM.Domain.Queries.v1.GetAllNotam
 {
     public class GetAllNotamQueryResponse
     {
-        public string Type { get; set; }
-        public string IATA { get; set; }
-        public string Runway { get; set; }
-        public DateTime ExpiryDate { get; set; }
-        public DateTime StartTime { get; set; }
-        public DateTime EndTime { get; set; }
-        public string Comments { get; set; }
-        public bool? IsExpired { get; set; }
+        public List<NotamDTO> Notams { get; set; }
+
     }
 }
