@@ -5,6 +5,7 @@ using APIMeuAmigoNOTAM.Domain.Queries.v1.GetAllNotam;
 using APIMeuAmigoNOTAM.Domain.Queries.v1.GetNotamById;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace APIMeuAmigoNOTAM.Controllers.v1
 {
@@ -19,23 +20,28 @@ namespace APIMeuAmigoNOTAM.Controllers.v1
             _mediator = mediator;
         }
 
-       /*[HttpPost]
-       public async Task<IActionResult> CreateNotam([FromBody] CreateNotam command)
-       {
-;
-       }*/
-
-       /*[HttpDelete("{id}")]
-       public async Task<IActionResult> DeleteNotamById(string id)
-       {
-
-       }*/
-
-        /*[HttpPut("{id}")]
-        public async Task<IActionResult> UpdateNotam(string id, [FromBody] UpdateNotam command )
+        [HttpPost]
+        public async Task<IActionResult> CreateNotam([FromBody] CreateNotamCommand command)
         {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
 
-        }*/
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteNotamById(string id)
+        {
+            var command = new DeleteNotamByIdCommand { Id = id };
+            var result = await _mediator.Send(command);
+            return result.Success ? Ok() : NotFound();
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateNotam(string id, [FromBody] UpdateNotamCommand command)
+        {
+            command.Id = id;
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
 
         [HttpGet]
         public async Task<IActionResult> GetAllNotam()
@@ -45,10 +51,12 @@ namespace APIMeuAmigoNOTAM.Controllers.v1
             return Ok(result);
         }
 
-        /*[HttpGet("{id}")]
-        public async Task<IActionResult> GetNotam(string id)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetNotamById(string id)
         {
-          
-        }*/
+            var query = new GetNotamByIdQuery { Id = id };
+            var result = await _mediator.Send(query);
+            return result != null ? Ok(result) : NotFound();
+        }
     }
 }

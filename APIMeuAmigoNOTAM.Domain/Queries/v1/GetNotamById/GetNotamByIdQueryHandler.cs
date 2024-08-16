@@ -1,9 +1,11 @@
 ﻿using APIMeuAmigoNOTAM.Domain.Contracts.v1;
+using APIMeuAmigoNOTAM.Domain.Entities.v1;
 using AutoMapper;
 using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,9 +21,12 @@ namespace APIMeuAmigoNOTAM.Domain.Queries.v1.GetNotamById
             _repository = repository;
             _mapper = mapper;
         }
-        public Task<GetNotamByIdQueryResponse> Handle(GetNotamByIdQuery request, CancellationToken cancellationToken)
+        public async Task<GetNotamByIdQueryResponse> Handle(GetNotamByIdQuery request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+
+            var customer = await _repository.GetById(request.Id);
+
+            return _mapper.Map<GetNotamByIdQueryResponse>(customer);
         }
     }
 }

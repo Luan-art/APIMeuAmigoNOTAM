@@ -21,9 +21,12 @@ namespace APIMeuAmigoNOTAM.Domain.Queries.v1.GetAllNotam
             _mapper = mapper;
         }
 
-        public Task<GetAllNotamQueryResponse> Handle(GetAllNotamQuery request, CancellationToken cancellationToken)
+        public async Task<GetAllNotamQueryResponse> Handle(GetAllNotamQuery request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+
+            var customer = await _repository.GetAllAsync();
+
+            return _mapper.Map<GetAllNotamQueryResponse>(customer);
         }
     }
 }
