@@ -30,10 +30,11 @@ namespace Infra.Repositories
             await Collection.ReplaceOneAsync(filter, entity, new ReplaceOptions { IsUpsert = true });
         }
 
-        public async Task DeleteAsync(TId id)
+        public async Task<bool> DeleteAsync(TId id)
         {
             var filter = Builders<TEntity>.Filter.Eq("Id", id);
-            await Collection.DeleteOneAsync(filter);
+            var result = await Collection.DeleteOneAsync(filter);
+            return result.DeletedCount > 0;   
         }
 
         public async Task<TEntity?> GetById(TId id)
