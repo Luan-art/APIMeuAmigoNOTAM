@@ -12,11 +12,11 @@ namespace APIMeuAmigoNOTAM.Domain.Commands.v1.UpdateNotam
     {
         public UpdateNotamCommandProfile()
         {
-            CreateMap<CreateNotamCommand, Notam>()
+            CreateMap<UpdateNotamCommand, Notam>()
                 .ForMember(fieldOutput => fieldOutput.Id, option => option
                     .MapFrom(input => input));
 
-            CreateMap<Notam, CreateNotamCommandResponse>();
+            CreateMap<Notam, UpdateNotamCommandResponse>();
         }
 
     }

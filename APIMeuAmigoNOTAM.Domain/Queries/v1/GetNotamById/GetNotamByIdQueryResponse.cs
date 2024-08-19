@@ -1,4 +1,5 @@
-﻿using System;
+﻿using APIMeuAmigoNOTAM.Domain.Entities.v1;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,5 +17,20 @@ namespace APIMeuAmigoNOTAM.Domain.Queries.v1.GetNotamById
         public DateTime EndTime { get; set; }
         public string Comments { get; set; }
         public bool? IsExpired { get; set; }
+
+        public static implicit operator GetNotamByIdQueryResponse(Notam notam)
+        {
+            return new GetNotamByIdQueryResponse
+            {
+                Type = notam.Type,
+                IATA = notam.IATA,
+                Runway = notam.Runway,
+                ExpiryDate = notam.ExpiryDate,
+                Comments = notam.Comments,
+                IsExpired = notam.IsExpired,
+                StartTime = notam.StartTime,
+                EndTime = notam.EndTime
+            };
+        }
     }
 }

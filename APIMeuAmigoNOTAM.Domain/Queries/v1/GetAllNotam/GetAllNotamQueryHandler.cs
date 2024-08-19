@@ -24,9 +24,9 @@ namespace APIMeuAmigoNOTAM.Domain.Queries.v1.GetAllNotam
         public async Task<GetAllNotamQueryResponse> Handle(GetAllNotamQuery request, CancellationToken cancellationToken)
         {
 
-            var customer = await _repository.GetAllAsync();
+            var notam = await _repository.GetAllAsync();
 
-            return _mapper.Map<GetAllNotamQueryResponse>(customer);
+            return _mapper.Map<GetAllNotamQueryResponse>(notam);
         }
     }
 }

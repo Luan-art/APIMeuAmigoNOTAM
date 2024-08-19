@@ -24,9 +24,9 @@ namespace APIMeuAmigoNOTAM.Domain.Queries.v1.GetNotamById
         public async Task<GetNotamByIdQueryResponse> Handle(GetNotamByIdQuery request, CancellationToken cancellationToken)
         {
 
-            var customer = await _repository.GetById(request.Id);
+            var notam = await _repository.GetById(request.Id);
 
-            return _mapper.Map<GetNotamByIdQueryResponse>(customer);
+            return notam;
         }
     }
 }
