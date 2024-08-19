@@ -23,17 +23,28 @@ namespace APIMeuAmigoNOTAM.Domain.Commands.v1.UpdateNotam
         public async Task<UpdateNotamCommandResponse> Handle(UpdateNotamCommand request, CancellationToken cancellationToken)
         {
             var existingNotam = await _repository.GetById(request.Id);
+                
             if (existingNotam == null)
             {
-                return null;
+                throw new KeyNotFoundException($"Notam with ID {request.Id} not found.");
             }
 
             _mapper.Map(request, existingNotam);
 
-            await _repository.UpdateAsync(existingNotam);
+            existingNotam.Id = request.Id;
+
+            try
+            {
+                await _repository.UpdateAsync(existingNotam);
+            }
+            catch (Exception ex)
+            {
+                 throw new InvalidOperationException("Failed to update Notam.", ex);
+            }
 
             var response = _mapper.Map<UpdateNotamCommandResponse>(existingNotam);
             return response;
         }
+        
     }
 }
