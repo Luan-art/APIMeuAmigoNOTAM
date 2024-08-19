@@ -26,6 +26,7 @@ namespace APIMeuAmigoNOTAM.Domain.Commands.v1.CreateNotam
         public async Task<CreateNotamCommandResponse> Handle(CreateNotamCommand request, CancellationToken cancellationToken)
         {
             var notam = _mapper.Map<Notam>(request);
+            notam.Id = null;  
             try
             {
                 await _repository.AddAsync(notam);
