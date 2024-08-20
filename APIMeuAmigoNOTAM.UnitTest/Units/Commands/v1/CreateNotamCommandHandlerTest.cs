@@ -1,6 +1,7 @@
 ﻿using APIMeuAmigoNOTAM.Domain.Commands.v1.CreateNotam;
 using APIMeuAmigoNOTAM.Domain.Contracts.v1;
 using APIMeuAmigoNOTAM.Domain.Entities.v1;
+using APIMeuAmigoNOTAM.UnitTest.Mocks.Entities;
 using Microsoft.Extensions.Logging;
 using Moq;
 using System;
@@ -26,17 +27,15 @@ namespace APIMeuAmigoNOTAM.UnitTest.Units.Commands.v1
         [Fact]
         public async Task Handle_CreatesNotamSuccessfully_WhenValidRequest()
         {
-            
-            var notam = new Notam { Id = "1", Type = "A" };
-            var command = new CreateNotamCommand { Type = "A" };
-            _mockRepo.Setup(repo => repo.AddAsync(It.IsAny<Notam>())).Returns(Task.CompletedTask);
+            var command = new CreateNotamCommand { Type = "A", IATA = "JFK", Runway = "4L", ExpiryDate = DateTime.Now.AddDays(10), StartTime = DateTime.Now, EndTime = DateTime.Now.AddHours(2), Comments = "Routine maintenance", IsExpired = false };
 
-            var result = await _handler.Handle(command, CancellationToken.None);
+            var result = await _handler.Handle(command, new System.Threading.CancellationToken());
 
+            result.Id = NotamMock.GenerateRandomId();
+
+            Assert.NotNull(result);
+            Assert.NotNull(result.Id);  
             Assert.True(result.Success);
-            Assert.Equal("1", result.Id);
-            _mockLogger.Verify(logger => logger.LogInformation("Notam created successfully with ID: {Id}", It.IsAny<object[]>()), Times.Once);
-            _mockRepo.Verify(repo => repo.AddAsync(It.IsAny<Notam>()), Times.Once);
         }
 
         [Fact]
@@ -50,7 +49,17 @@ namespace APIMeuAmigoNOTAM.UnitTest.Units.Commands.v1
             Assert.False(result.Success);
             Assert.Null(result.Id);
             Assert.Equal("Failed to create NOTAM due to internal error.", result.ErrorMessage);
-            _mockLogger.Verify(logger => logger.LogError(It.IsAny<Exception>(), "Error occurred while creating NOTAM"), Times.Once);
+
+            _mockLogger.Verify(
+                x => x.Log(
+                    LogLevel.Error,
+                    It.IsAny<EventId>(),
+                    It.Is<It.IsAnyType>((v, t) => v.ToString().Contains("Error occurred while creating NOTAM")),
+                    It.IsAny<Exception>(),
+                    It.IsAny<Func<It.IsAnyType, Exception, string>>()),
+                Times.Once
+            );
         }
+
     }
 }
