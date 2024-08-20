@@ -14,7 +14,7 @@ namespace APIMeuAmigoNOTAM.Domain.Queries.v1.GetAllNotam
     {
         private readonly INotamRepository _repository;
  
-        public GetAllNotamQueryHandler(INotamRepository repository, IMapper mapper)
+        public GetAllNotamQueryHandler(INotamRepository repository)
         {
             _repository = repository;
          }
