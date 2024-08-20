@@ -12,7 +12,9 @@ namespace APIMeuAmigoNOTAM.Domain.Dtos.v1
         public string IATA { get; set; }
         public string Runway { get; set; }
         public DateTime ExpiryDate { get; set; }
+        public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
-        public string Comments { get; set; }
+        public string? Comments { get; set; }
+        public bool IsExpired { get; set; }
     }
 }

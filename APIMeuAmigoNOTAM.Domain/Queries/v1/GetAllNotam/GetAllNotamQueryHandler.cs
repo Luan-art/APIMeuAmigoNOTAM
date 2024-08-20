@@ -13,20 +13,18 @@ namespace APIMeuAmigoNOTAM.Domain.Queries.v1.GetAllNotam
     public class GetAllNotamQueryHandler : IRequestHandler<GetAllNotamQuery, GetAllNotamQueryResponse>
     {
         private readonly INotamRepository _repository;
-        private readonly IMapper _mapper;
-
+ 
         public GetAllNotamQueryHandler(INotamRepository repository, IMapper mapper)
         {
             _repository = repository;
-            _mapper = mapper;
-        }
+         }
 
         public async Task<GetAllNotamQueryResponse> Handle(GetAllNotamQuery request, CancellationToken cancellationToken)
         {
 
             var notam = await _repository.GetAllAsync();
 
-            return _mapper.Map<GetAllNotamQueryResponse>(notam);
+            return (GetAllNotamQueryResponse)notam;
         }
     }
 }

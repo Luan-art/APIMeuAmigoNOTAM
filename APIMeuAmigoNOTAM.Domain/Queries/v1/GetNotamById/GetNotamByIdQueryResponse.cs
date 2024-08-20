@@ -18,8 +18,10 @@ namespace APIMeuAmigoNOTAM.Domain.Queries.v1.GetNotamById
         public string Comments { get; set; }
         public bool? IsExpired { get; set; }
 
-        public static implicit operator GetNotamByIdQueryResponse(Notam notam)
+        public static explicit operator GetNotamByIdQueryResponse(Notam notam)
         {
+            if (notam == null) return null;  
+
             return new GetNotamByIdQueryResponse
             {
                 Type = notam.Type,

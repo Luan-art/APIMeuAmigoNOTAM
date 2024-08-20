@@ -56,6 +56,7 @@ namespace APIMeuAmigoNOTAM.Controllers.v1
         {
             var query = new GetNotamByIdQuery { Id = id };
             var result = await _mediator.Send(query);
+
             return result != null ? Ok(result) : NotFound();
         }
     }

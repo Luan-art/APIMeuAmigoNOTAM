@@ -8,12 +8,10 @@ using System.Threading.Tasks;
 public class DeleteNotamByIdCommandHandler : IRequestHandler<DeleteNotamByIdCommand, DeleteNotamByIdCommandResponse>
 {
     private readonly INotamRepository _repository;
-    private readonly IMapper _mapper;
 
-    public DeleteNotamByIdCommandHandler(INotamRepository repository, IMapper mapper)
+    public DeleteNotamByIdCommandHandler(INotamRepository repository)
     {
         _repository = repository;
-        _mapper = mapper;
     }
 
     public async Task<DeleteNotamByIdCommandResponse> Handle(DeleteNotamByIdCommand request, CancellationToken cancellationToken)
