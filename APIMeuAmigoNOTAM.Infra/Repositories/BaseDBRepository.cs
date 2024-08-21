@@ -47,5 +47,11 @@ namespace Infra.Repositories
         {
             return await Collection.Find(_ => true).ToListAsync();
         }
+
+        public async Task<List<TEntity>> GetIsExperidAsync(bool isExpired)
+        {
+            var filter = Builders<TEntity>.Filter.Eq("IsExpired", isExpired);
+            return await Collection.Find(filter).ToListAsync();
+        }
     }
 }

@@ -4,6 +4,7 @@ using MediatR;
 using FluentValidation;
 using Microsoft.Extensions.Configuration;
 using APIMeuAmigoNOTAM.Domain.Commands.v1.CreateNotam;
+using APIMeuAmigoNOTAM.Domain.Commands.v1.UpdateNotam;
 
 
 namespace Domain
@@ -28,6 +29,7 @@ namespace Domain
         private static IServiceCollection AddValidators(this IServiceCollection services)
         {
             services.AddScoped<IValidator<CreateNotamCommand>, CreateNotamCommandValidator>();
+            services.AddScoped<IValidator<UpdateNotamCommand> , UpdateNotamCommandValidator>();
             return services;
         }
 

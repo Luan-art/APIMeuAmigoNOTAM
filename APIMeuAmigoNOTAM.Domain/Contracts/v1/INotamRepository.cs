@@ -1,4 +1,5 @@
 ﻿using APIMeuAmigoNOTAM.Domain.Entities.v1;
+using APIMeuAmigoNOTAM.Domain.Queries.v1.GetNotamByIsExperid;
 using System;
 using System.Collections.Generic;
 using System.Linq;

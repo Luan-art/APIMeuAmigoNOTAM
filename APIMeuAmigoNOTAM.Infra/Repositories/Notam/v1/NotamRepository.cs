@@ -32,12 +32,6 @@ namespace APIMeuAmigoNOTAM.Infra.Repositories.Notam.v1
             return await Collection.Find(filter).SingleOrDefaultAsync();
         }
 
-        public async Task<bool> AnyAsync(Expression<Func<Domain.Entities.v1.Notam, bool>> predicate)
-        {
-            var count = await Collection.CountDocumentsAsync(predicate);
-            return count > 0;
-        }
-
         async Task<List<Domain.Entities.v1.Notam>> IRepository<Domain.Entities.v1.Notam, string>.GetAllAsync()
         {
             return await Collection.Find(_ => true).ToListAsync();

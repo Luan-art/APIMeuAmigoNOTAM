@@ -3,6 +3,7 @@ using APIMeuAmigoNOTAM.Domain.Commands.v1.DeleteNotamByID;
 using APIMeuAmigoNOTAM.Domain.Commands.v1.UpdateNotam;
 using APIMeuAmigoNOTAM.Domain.Queries.v1.GetAllNotam;
 using APIMeuAmigoNOTAM.Domain.Queries.v1.GetNotamById;
+using APIMeuAmigoNOTAM.Domain.Queries.v1.GetNotamByIsExperid;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -55,6 +56,15 @@ namespace APIMeuAmigoNOTAM.Controllers.v1
         public async Task<IActionResult> GetNotamById(string id)
         {
             var query = new GetNotamByIdQuery { Id = id };
+            var result = await _mediator.Send(query);
+
+            return result != null ? Ok(result) : NotFound();
+        }
+
+        [HttpGet("Experid/{isExperid}")]
+        public async Task<IActionResult> GetIsExperid(bool isExperid)
+        {
+            var query = new GetNotamByIsExperidQuery { isExperid = isExperid };
             var result = await _mediator.Send(query);
 
             return result != null ? Ok(result) : NotFound();

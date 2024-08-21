@@ -12,7 +12,7 @@ namespace APIMeuAmigoNOTAM.Domain.Contracts.v1
         Task<bool> DeleteAsync(TId id); 
         Task<TEntity?> GetById(TId id);
         Task<List<TEntity>> GetAllAsync();
-
+        Task <List<TEntity>> GetIsExperidAsync(bool isExperid);
 
     }
 }
