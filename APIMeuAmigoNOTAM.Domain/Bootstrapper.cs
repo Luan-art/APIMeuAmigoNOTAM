@@ -13,7 +13,6 @@ namespace Domain
         public static IServiceCollection AddDomainContext(this IServiceCollection services, IConfiguration configuration)
         {
             return services
-                .AddAutoMapper(typeof(Bootstrapper))
                 .AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining(typeof(Bootstrapper)))
                 .AddCommands()
                 .AddValidators();

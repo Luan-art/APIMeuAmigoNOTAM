@@ -20,32 +20,5 @@ namespace APIMeuAmigoNOTAM.Domain.Entities.v1
         public string? Comments { get; set; }
         public bool IsExpired { get; set; } 
 
-        public Notam()
-        {
-        }
-
-        public Notam(NotamDTO dto)
-        {
-            Type = dto.Type;
-            IATA = dto.IATA;
-            Runway = dto.Runway;
-            ExpiryDate = dto.ExpiryDate;
-            StartTime = DateTime.Now;
-            EndTime = dto.EndTime;
-            Comments = dto.Comments;
-            IsExpired = false;
-        }
-
-        public bool Validate()
-        {
-            var now = DateTime.Now;
-            bool isValidType = !string.IsNullOrEmpty(Type);
-            bool isValidIATA = !string.IsNullOrEmpty(IATA) && IATA.Length == 3;
-            bool isValidRunway = !string.IsNullOrEmpty(Runway);
-            bool isValidExpiry = ExpiryDate > now;
-            bool isValidEnd = EndTime > StartTime;
-
-            return isValidType && isValidIATA && isValidRunway && isValidExpiry && isValidEnd;
-        }
     }
 }

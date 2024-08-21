@@ -38,8 +38,8 @@ namespace APIMeuAmigoNOTAM.UnitTest.Units.Commands.v1
         [Fact]
         public async Task Handle_ThrowsKeyNotFoundException_WhenNotamDoesNotExist()
         {
-            _mockRepo.Setup(repo => repo.GetById("99")).ReturnsAsync((Notam)null);
-            var command = new UpdateNotamCommand { Id = "99" };
+            _mockRepo.Setup(repo => repo.GetById("1")).ReturnsAsync((Notam)null);
+            var command = new UpdateNotamCommand { Id = "1" };
 
             await Assert.ThrowsAsync<KeyNotFoundException>(() => _handler.Handle(command, CancellationToken.None));
         }

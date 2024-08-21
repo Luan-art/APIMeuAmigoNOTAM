@@ -46,6 +46,7 @@ public class DeleteNotamByIdCommandHandler : IRequestHandler<DeleteNotamByIdComm
 
             return new DeleteNotamByIdCommandResponse
             {
+                Id = request.Id,
                 Success = true,
             };
         }

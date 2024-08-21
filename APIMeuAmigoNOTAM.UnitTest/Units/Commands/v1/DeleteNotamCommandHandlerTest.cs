@@ -24,7 +24,6 @@ namespace APIMeuAmigoNOTAM.UnitTest.Units.Commands.v1
         public async Task Handle_ReturnsFailure_WhenIdIsNullOrEmpty()
         {
             var command = new DeleteNotamByIdCommand { Id = "" };
-
             
             var result = await _handler.Handle(command, CancellationToken.None);
 

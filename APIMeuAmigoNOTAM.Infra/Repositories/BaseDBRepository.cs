@@ -43,12 +43,6 @@ namespace Infra.Repositories
             return await Collection.Find(filter).SingleOrDefaultAsync();
         }
 
-        public async Task<bool> AnyAsync(Expression<Func<TEntity, bool>> predicate)
-        {
-            var count = await Collection.CountDocumentsAsync(predicate);
-            return count > 0;
-        }
-
         public async Task<List<TEntity>> GetAllAsync()
         {
             return await Collection.Find(_ => true).ToListAsync();
