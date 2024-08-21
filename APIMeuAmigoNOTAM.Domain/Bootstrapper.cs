@@ -1,11 +1,10 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-
-using MediatR;
-using FluentValidation;
-using Microsoft.Extensions.Configuration;
-using APIMeuAmigoNOTAM.Domain.Commands.v1.CreateNotam;
+﻿using APIMeuAmigoNOTAM.Domain.Commands.v1.CreateNotam;
 using APIMeuAmigoNOTAM.Domain.Commands.v1.UpdateNotam;
-
+using APIMeuAmigoNOTAM.Domain.Pipes.v1;
+using FluentValidation;
+using MediatR;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Domain
 {
@@ -13,25 +12,16 @@ namespace Domain
     {
         public static IServiceCollection AddDomainContext(this IServiceCollection services, IConfiguration configuration)
         {
-            return services
-                .AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining(typeof(Bootstrapper)))
-                .AddCommands()
-                .AddValidators();
-        }
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining(typeof(Bootstrapper)));
 
-        private static IServiceCollection AddCommands(this IServiceCollection services)
-        {
             services.AddTransient<CreateNotamCommandHandler>();
 
-            return services;
-        }
-
-        private static IServiceCollection AddValidators(this IServiceCollection services)
-        {
             services.AddScoped<IValidator<CreateNotamCommand>, CreateNotamCommandValidator>();
-            services.AddScoped<IValidator<UpdateNotamCommand> , UpdateNotamCommandValidator>();
+            services.AddScoped<IValidator<UpdateNotamCommand>, UpdateNotamCommandValidator>();
+
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(FailFastValidation<,>));
+
             return services;
         }
-
     }
 }

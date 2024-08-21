@@ -30,8 +30,6 @@ namespace APIMeuAmigoNOTAM.Domain.Commands.v1.CreateNotam
                 .GreaterThan(command => command.StartTime)
                 .WithMessage("A 'EndTime' deve ser após a 'StartTime'.");
 
-            RuleFor(command => command.Comments)
-                .NotEmpty().WithMessage("O campo 'Comments' é obrigatório.");
         }
     }
 }
