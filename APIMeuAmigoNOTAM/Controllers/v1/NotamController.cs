@@ -69,5 +69,11 @@ namespace APIMeuAmigoNOTAM.Controllers.v1
 
             return result != null ? Ok(result) : NotFound();
         }
+
+        [HttpGet("health")]
+        public IActionResult Health()
+        {
+            return Ok(true);
+        }
     }
 }

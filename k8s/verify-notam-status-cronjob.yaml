@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: verify-notam-status
+  namespace: meuamigonotam
+spec:
+  schedule: "* * * * *"    
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: verify-notam-status
+            image: curlimages/curl:latest   
+            args:
+            - /bin/sh
+            - -c
+            - "curl -f http://meuamigonotam-service:80/api/notam/health || exit 1"   
+          restartPolicy: OnFailure  

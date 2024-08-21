@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: meuamigonotam-deployment
+  namespace: meuamigonotam  
+spec:
+  replicas: 3  
+  selector:
+    matchLabels:
+      app: meuamigonotam
+  template:
+    metadata:
+      labels:
+        app: meuamigonotam
+    spec:
+      containers:
+      - name: meuamigonotam-container
+        image: meuamigonotam:v2   
+        imagePullPolicy: IfNotPresent   
+        ports:
+        - containerPort: 80  
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "Production"
