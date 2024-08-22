@@ -10,7 +10,6 @@ namespace APIMeuAmigoNOTAM.Domain.Queries.v1.GetAllNotam
 {
     public class GetAllNotamQuery : IRequest<GetAllNotamQueryResponse>
     {
-        public string Id { get; set; }
 
     }
 }

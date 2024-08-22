@@ -19,8 +19,8 @@ namespace APIMeuAmigoNOTAM.Domain.Commands.v1.CreateNotam
             RuleFor(command => command.Runway)
                 .NotEmpty().WithMessage("O campo 'Runway' é obrigatório.");
 
-            RuleFor(command => command.ExpiryDate)
-                .GreaterThan(DateTime.Now).WithMessage("A data de expiração deve ser futura.");
+           // RuleFor(command => command.ExpiryDate)
+          //      .GreaterThan(DateTime.Now).WithMessage("A data de expiração deve ser futura.");
 
             RuleFor(command => command.StartTime)
                 .LessThan(command => command.EndTime)

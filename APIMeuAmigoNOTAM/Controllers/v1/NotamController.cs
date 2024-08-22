@@ -1,7 +1,9 @@
 ﻿using APIMeuAmigoNOTAM.Domain.Commands.v1.CreateNotam;
 using APIMeuAmigoNOTAM.Domain.Commands.v1.DeleteNotamByID;
+using APIMeuAmigoNOTAM.Domain.Commands.v1.UpdateExpired;
 using APIMeuAmigoNOTAM.Domain.Commands.v1.UpdateNotam;
 using APIMeuAmigoNOTAM.Domain.Queries.v1.GetAllNotam;
+using APIMeuAmigoNOTAM.Domain.Queries.v1.GetIdsIfExperid;
 using APIMeuAmigoNOTAM.Domain.Queries.v1.GetNotamById;
 using APIMeuAmigoNOTAM.Domain.Queries.v1.GetNotamByIsExperid;
 using MediatR;
@@ -44,6 +46,14 @@ namespace APIMeuAmigoNOTAM.Controllers.v1
             return Ok(result);
         }
 
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> UpdateExperid(string id)
+        {
+            var command = new UpdateExpiredCommand { Id = id };
+            var result = await _mediator.Send(command);
+            return result.Success ? Ok(result) : NotFound();
+        }
+
         [HttpGet]
         public async Task<IActionResult> GetAllNotam()
         {
@@ -68,6 +78,14 @@ namespace APIMeuAmigoNOTAM.Controllers.v1
             var result = await _mediator.Send(query);
 
             return result != null ? Ok(result) : NotFound();
+        }
+
+        [HttpGet("IdsExperid")]
+        public async Task<IActionResult> GetIdsIfExperid()
+        {
+            var query = new GetIdIfExperidQuery();
+            var result = await _mediator.Send(query);
+            return Ok(result);
         }
 
         [HttpGet("health")]
