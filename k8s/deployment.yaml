@@ -15,10 +15,12 @@ spec:
     spec:
       containers:
       - name: meuamigonotam-container
-        image: meuamigonotam:v2   
+        image: meuamigonotam:v4  
         imagePullPolicy: IfNotPresent   
         ports:
         - containerPort: 80  
         env:
         - name: ASPNETCORE_ENVIRONMENT
           value: "Production"
+        - name: MONGODB_URI  
+          value: "mongodb://mongodb-service:27017" 

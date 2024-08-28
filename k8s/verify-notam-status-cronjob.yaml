@@ -4,16 +4,17 @@ metadata:
   name: verify-notam-status
   namespace: meuamigonotam
 spec:
-  schedule: "* * * * *"    
+  schedule: "* * * * *" 
   jobTemplate:
     spec:
       template:
         spec:
           containers:
-          - name: verify-notam-status
-            image: curlimages/curl:latest   
+          - name: verify-notam-status-container
+            image: verify-notam-status:v1  
+            imagePullPolicy: IfNotPresent
             args:
-            - /bin/sh
-            - -c
-            - "curl -f http://meuamigonotam-service:80/api/notam/health || exit 1"   
-          restartPolicy: OnFailure  
+            - "dotnet"
+            - "VerifyNotamStatus.Cron.dll"  
+          restartPolicy: OnFailure
+  
