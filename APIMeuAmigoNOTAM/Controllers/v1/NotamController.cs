@@ -17,10 +17,12 @@ namespace APIMeuAmigoNOTAM.Controllers.v1
     public class NotamController : ControllerBase
     {
         private readonly IMediator _mediator;
-
-        public NotamController(IMediator mediator)
+        private readonly ILogger<NotamController> _logger;
+        
+        public NotamController(IMediator mediator, ILogger<NotamController> logger)
         {
             _mediator = mediator;
+            _logger = logger;
         }
 
         [HttpPost]
@@ -83,8 +85,22 @@ namespace APIMeuAmigoNOTAM.Controllers.v1
         [HttpGet("IdsExperid")]
         public async Task<IActionResult> GetIdsIfExperid()
         {
+            _logger.LogInformation("Starting GetIdsIfExperid method.");
+
             var query = new GetIdIfExperidQuery();
             var result = await _mediator.Send(query);
+
+            if (result != null && result.Ids.Any())
+            {
+                _logger.LogInformation($"Received {result.Ids.Count} expired IDs.");
+            }
+            else
+            {
+                _logger.LogInformation("No expired IDs found.");
+            }
+
+            _logger.LogInformation("Finished GetIdsIfExperid method.");
+
             return Ok(result);
         }
 

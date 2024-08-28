@@ -11,7 +11,7 @@ spec:
         spec:
           containers:
           - name: verify-notam-status-container
-            image: verify-notam-status:v1  
+            image: verify-notam-status:debug
             imagePullPolicy: IfNotPresent
             args:
             - "dotnet"
